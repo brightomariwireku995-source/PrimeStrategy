@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="css/case-study.css">
 </head>
 
-<body class="ps-page-body cs-body" data-active-theme="orange">
+<body class="ps-page-body cs-body">
 
   <div class="ps-cursor-dot"></div>
   <div class="ps-cursor-ring"></div>
@@ -32,13 +32,20 @@
     <div class="psa-doors__ring"></div>
   </div>
 
+  <!-- ═══ FIXED BACKGROUND LAYER ═══ -->
+  <div class="cs-bg" aria-hidden="true">
+    <div class="cs-bg__image"></div>
+    <div class="cs-bg__wash"></div>
+    <div class="cs-bg__vignette"></div>
+  </div>
+
   <!-- ═══ MOUSE GLOW ═══ -->
   <div class="cs-glow" id="csGlow" aria-hidden="true"></div>
 
-  <!-- ═══ TOP NAV ═══ -->
-  <header class="ps-nav ps-nav--dark" id="siteNav">
+  <!-- ═══ TOP NAV (Light Theme) ═══ -->
+  <header class="ps-nav" id="siteNav">
     <a class="ps-nav__brand" href="index.html" aria-label="PrimeStrategy Home">
-      <img src="images/ps-logo.png" alt="PrimeStrategy — Accra | Washington D.C.">
+      <img src="images/ps-logo.png" alt="PrimeStrategy | Accra | Washington D.C.">
     </a>
     <nav class="ps-nav__links" aria-label="Site navigation">
       <a href="about.html">About</a>
@@ -46,7 +53,6 @@
       <a href="case-study.html" class="is-active">Case Study</a>
       <a href="careers.html">Careers</a>
       <a href="contact.html">Contact</a>
-      <a href="login.html">Client Login</a>
     </nav>
     <button class="ps-nav__toggle" aria-label="Open navigation" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -60,15 +66,15 @@
 
   <!-- ═══ FLOATING RETURN ═══ -->
   <a class="psa-floating-return" href="index.html">
-    <span>←</span> Back to Homepage
+    Back to Homepage
   </a>
 
   <!-- ═══ HORIZONTAL FILMSTRIP ═══ -->
   <main class="cs-film" id="csFilm">
     <div class="cs-track" id="csTrack">
 
-      <!-- PANEL 1 — COVER (Brand Orange) -->
-      <section class="cs-panel cs-panel--cover is-active" data-panel="0" data-theme="orange">
+      <!-- PANEL 1 — COVER -->
+      <section class="cs-panel cs-panel--cover is-active" data-panel="0">
         <div class="cs-panel__inner">
           <div class="cs-panel__head">
             <span class="cs-eyebrow" data-pixel-text>Industry Brief</span>
@@ -82,8 +88,8 @@
         </div>
       </section>
 
-      <!-- PANEL 2 — THE MARKET (Brand Navy) -->
-      <section class="cs-panel" data-panel="1" data-theme="navy">
+      <!-- PANEL 2 — THE MARKET -->
+      <section class="cs-panel" data-panel="1">
         <div class="cs-panel__inner">
           <div class="cs-panel__head">
             <span class="cs-eyebrow" data-pixel-text>The Market</span>
@@ -98,8 +104,8 @@
         </div>
       </section>
 
-      <!-- PANEL 3 — THE GHANAIAN SECTOR (Editorial White) -->
-      <section class="cs-panel" data-panel="2" data-theme="white">
+      <!-- PANEL 3 — THE GHANAIAN SECTOR -->
+      <section class="cs-panel" data-panel="2">
         <div class="cs-panel__inner">
           <div class="cs-panel__head">
             <span class="cs-eyebrow" data-pixel-text>The Ghanaian Sector</span>
@@ -131,8 +137,8 @@
         </div>
       </section>
 
-      <!-- PANEL 4 — CHALLENGES AND REFORM (Slate Grey) -->
-      <section class="cs-panel" data-panel="3" data-theme="grey">
+      <!-- PANEL 4 — CHALLENGES AND REFORM -->
+      <section class="cs-panel" data-panel="3">
         <div class="cs-panel__inner">
           <div class="cs-panel__head">
             <span class="cs-eyebrow" data-pixel-text>Challenges and Reform</span>
@@ -147,8 +153,8 @@
         </div>
       </section>
 
-      <!-- PANEL 5 — WHAT THIS MEANS (Cobalt Blue) -->
-      <section class="cs-panel" data-panel="4" data-theme="blue">
+      <!-- PANEL 5 — WHAT THIS MEANS -->
+      <section class="cs-panel" data-panel="4">
         <div class="cs-panel__inner">
           <div class="cs-panel__head">
             <span class="cs-eyebrow" data-pixel-text>What This Means for Enterprises</span>
@@ -158,14 +164,14 @@
           </div>
           <div class="cs-panel__body">
             <p>Ghana's insurance sector sits at an inflection point: the regulatory floor is rising, awareness is being actively pushed by the National Insurance Commission, and the ratio of insured individuals to the population remains low enough that expansion is a function of reach rather than replacement.</p>
-            <p>For insurers and adjacent financial services providers, this creates three imperatives. First, distribution must follow the population — into the four regions the pilot campaign targeted first, and beyond. Second, product design must speak to a market still building its first relationship with insurance rather than a mature book of loyal policyholders. Third, capital planning must anticipate the higher prudential floor that the regulator has signalled.</p>
-            <p>PrimeStrategy works with enterprises at exactly this stage — where market structure, consumer behaviour, and regulation intersect. Our research and advisory practice supports strategy, distribution, and analytics decisions in markets moving faster than their operating models.</p>
+            <p>For insurers and adjacent financial services providers, this creates three imperatives. First, distribution must follow the population, into the four regions the pilot campaign targeted first, and beyond. Second, product design must speak to a market still building its first relationship with insurance rather than a mature book of loyal policyholders. Third, capital planning must anticipate the higher prudential floor that the regulator has signalled.</p>
+            <p>PrimeStrategy works with enterprises at exactly this stage, where market structure, consumer behaviour, and regulation intersect. Our research and advisory practice supports strategy, distribution, and analytics decisions in markets moving faster than their operating models.</p>
           </div>
         </div>
       </section>
 
-      <!-- PANEL 6 — CLOSE (Deep Orange) -->
-      <section class="cs-panel cs-panel--close" data-panel="5" data-theme="deeporange">
+      <!-- PANEL 6 — CLOSE -->
+      <section class="cs-panel cs-panel--close" data-panel="5">
         <div class="cs-panel__inner">
           <div class="cs-panel__head">
             <span class="cs-eyebrow" data-pixel-text>Continue</span>
@@ -200,7 +206,7 @@
       var lastPanelIndex = -1;
       var ticking = false;
 
-      /* ═══ ORIGINAL TEXT SCRAMBLE (Glyphs Preserved) ═══ */
+      /* ═══ PIXEL TEXT SCRAMBLE ═══ */
       var pixelGlyphs = ["█", "▓", "▒", "░", "■", "▀", "▄", "▌", "▐"];
 
       function runPixelTextScramble(element, onProgress, onComplete) {
@@ -250,33 +256,17 @@
         }, 28);
       }
 
-      /* ═══ SECTION ARRIVAL: Scramble Drives Section Color Shift ═══ */
+      /* ═══ PANEL ARRIVAL ═══ */
       function triggerPanelArrival(panel) {
         panel.classList.add("is-active");
-        panel.classList.remove("is-color-settled");
-        panel.style.setProperty("--cs-scramble-progress", "0");
-
-        var activeTheme = panel.getAttribute("data-theme") || "orange";
-        document.body.setAttribute("data-active-theme", activeTheme);
 
         var textTargets = panel.querySelectorAll("[data-pixel-text]");
-        var targetsCount = textTargets.length;
-        var finishedCount = 0;
-
         textTargets.forEach(function (el) {
-          runPixelTextScramble(el, function (scrambleProgress) {
-            panel.style.setProperty("--cs-scramble-progress", scrambleProgress.toFixed(3));
-          }, function () {
-            finishedCount++;
-            if (finishedCount >= targetsCount) {
-              panel.style.setProperty("--cs-scramble-progress", "1");
-              panel.classList.add("is-color-settled");
-            }
-          });
+          runPixelTextScramble(el);
         });
       }
 
-      /* ═══ SCROLL DRIVER WITH PARALLEL SPLIT ENTRY/EXIT ═══ */
+      /* ═══ SCROLL DRIVER ═══ */
       function updateScroll() {
         if (window.innerWidth <= 900) return;
 
@@ -296,9 +286,7 @@
         rawProgress = progress * (total - 1);
         var activeIdx = Math.round(rawProgress);
 
-        /* Parallel opposing glide:
-           Left column enters from bottom & exits to top.
-           Right column enters from top & exits to bottom. */
+        /* Parallel opposing glide */
         panels.forEach(function (panel, i) {
           var dist = rawProgress - i;
 
@@ -318,8 +306,6 @@
               triggerPanelArrival(p);
             } else {
               p.classList.remove("is-active");
-              p.classList.remove("is-color-settled");
-              p.style.setProperty("--cs-scramble-progress", "0");
             }
           });
         }

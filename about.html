@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>About — PrimeStrategy Limited</title>
+  <title>About — PrimeStrategy Ghana Ltd.</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,6 +11,200 @@
   <link rel="stylesheet" href="css/shared.css">
   <link rel="stylesheet" href="css/page.css">
   <link rel="stylesheet" href="css/about.css">
+
+  <style>
+    /* --- POINTER & LAYER SAFETY --- */
+    .psa-panel__bg,
+    .psa-panel__scrim,
+    .psa-bg,
+    .ps-cursor-dot,
+    .ps-cursor-ring {
+      pointer-events: none !important;
+    }
+
+    /* --- STACKED CARD LAYOUT & TOP CLEARANCE --- */
+    .psa-main--stacked {
+      position: relative;
+      overflow: visible !important;
+    }
+
+    .psa-main--stacked .psa-panel {
+      position: sticky;
+      top: 0;
+      min-height: 100vh;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      box-sizing: border-box;
+      padding-top: calc(var(--ps-nav-h, 68px) + clamp(1.25rem, 3vh, 2.5rem));
+      padding-bottom: clamp(2rem, 4vh, 3.5rem);
+      overflow: hidden;
+    }
+
+    .psa-main--stacked .psa-panel:nth-child(1) { z-index: 1; }
+    .psa-main--stacked .psa-panel:nth-child(2) { z-index: 2; }
+    .psa-main--stacked .psa-panel:nth-child(3) { z-index: 3; }
+    .psa-main--stacked .psa-panel:nth-child(4) { z-index: 4; }
+
+    /* Prevent underlying card text from bleeding through rising cards */
+    .psa-main--stacked .psa-panel:not(.psa-panel--opening) {
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      box-shadow: 0 -20px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .psa-main--stacked .psa-panel .psa-panel__content {
+      position: relative;
+      z-index: 5;
+      margin-top: auto;
+      margin-bottom: auto;
+      will-change: transform, opacity;
+    }
+
+    /* --- FORCE VISIBILITY FOR OPENING CONTENT --- */
+    .psa-panel--opening [data-reveal],
+    .psa-panel--opening .psa-lead,
+    .psa-panel--opening .psa-lead [data-reveal] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+
+    /* Compact opening typography so expanded text fits within 100vh */
+    .psa-main--stacked .psa-panel--opening .psa-display {
+      font-size: clamp(2.2rem, 4.4vw, 3.8rem);
+      line-height: 1.05;
+      margin-top: 0.35rem;
+      margin-bottom: 0.75rem;
+    }
+
+    /* --- SPLIT PANEL STYLES --- */
+    .split-container {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      min-height: 0;
+      align-items: flex-start;
+      margin-top: 1rem;
+    }
+
+    .split-panel-left {
+      width: 100%;
+      flex-shrink: 0;
+      transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      padding-right: 0;
+    }
+
+    .split-panel-right {
+      width: 0;
+      max-height: 0;
+      flex-shrink: 0;
+      opacity: 0;
+      transform: translateX(40px);
+      transition: width 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  padding 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    /* Expanded split: 38% left / 62% right so all 3 paragraphs fit comfortably on screen */
+    .split-container.is-expanded .split-panel-left {
+      width: 38%;
+      padding-right: 2rem;
+      border-right: 1px solid rgba(0, 0, 0, 0.12);
+    }
+
+    .split-container.is-expanded .split-panel-right {
+      width: 62%;
+      max-height: 1200px;
+      opacity: 1;
+      transform: translateX(0);
+      padding-left: 2rem;
+    }
+
+    /* Text Styling */
+    .split-panel-left p,
+    .split-panel-right p {
+      margin-bottom: 0.85rem;
+      font-size: clamp(0.9rem, 1.02vw, 1rem);
+      line-height: 1.5;
+    }
+
+    .split-panel-right p:last-child {
+      margin-bottom: 0;
+    }
+
+    .read-more-btn {
+      display: inline-block;
+      margin-top: 0.4rem;
+      background: transparent;
+      border: none;
+      color: #E86A34;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-size: 0.85rem;
+      padding: 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
+    }
+    .read-more-btn:hover {
+      border-color: #E86A34;
+    }
+
+    /* Mobile / Short-Screen Flow */
+    @media (max-width: 900px) {
+      .psa-main--stacked .psa-panel {
+        position: relative;
+        min-height: auto;
+        border-radius: 0;
+      }
+
+      .split-container.is-expanded {
+        flex-direction: column;
+      }
+      .split-container.is-expanded .split-panel-left {
+        width: 100%;
+        padding-right: 0;
+        border-right: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 1.25rem;
+        margin-bottom: 1.25rem;
+      }
+      .split-container.is-expanded .split-panel-right {
+        width: 100%;
+        padding-left: 0;
+      }
+    }
+
+    .psa-vision-mission strong {
+      font-weight: 700;
+      font-style: normal;
+      color: #111;
+    }
+    .psa-anchors__split {
+      align-items: center;
+    }
+    .psa-vision-block {
+      margin-bottom: 2.5rem;
+    }
+    .psa-vision-block h2 {
+      margin-bottom: 0.5rem;
+      color: #E86A34;
+    }
+    .psa-vision-block p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+       <p class="psa-pullquote" data-reveal style="border-left: none !important; padding-left: 0 !important; margin-left: 0 !important;">
+  </style>
 </head>
 
 <body class="ps-page-body">
@@ -44,10 +238,9 @@
     <nav class="ps-nav__links" aria-label="Site navigation">
       <a href="about.html" class="is-active">About</a>
       <a href="services.html">Services</a>
-      <a href="case-study.html">Case Study</a>
+      <a href="client-experience.html">Client Experience</a>
       <a href="careers.html">Careers</a>
       <a href="contact.html">Contact</a>
-      <a href="login.html">Client Login</a>
     </nav>
     <button class="ps-nav__toggle" aria-label="Open navigation" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -55,52 +248,101 @@
   </header>
 
   <a class="psa-floating-return" href="index.html">
-    <span>←</span> Back to Homepage
+    Back to Homepage
   </a>
 
   <main class="psa-main psa-main--stacked">
 
-    <!-- OPENING -->
+    <!-- OPENING & WHAT WE DO -->
     <section class="psa-panel psa-panel--opening">
       <div class="psa-panel__bg" aria-hidden="true"></div>
       <div class="psa-panel__scrim psa-panel__scrim--light" aria-hidden="true"></div>
       <div class="psa-container psa-panel__content">
+
         <span class="ps-eyebrow" data-reveal>About PrimeStrategy</span>
         <h1 class="psa-display" data-reveal>
-          A research and IT consulting firm<br>
-          built on <span class="psa-em">conviction</span>.
+          What We <span class="psa-em">Do</span>.
         </h1>
-        <p class="psa-lead" data-reveal>
-          PrimeStrategy Ghana Limited partners with forward-looking organizations
-          to support their immediate priorities and long-term strategic goals —
-          from Accra to Washington D.C.
-        </p>
+
+        <div class="psa-lead">
+
+          <div class="split-container" id="whatWeDoContainer">
+
+            <!-- Left Panel -->
+            <div class="split-panel-left">
+              <p>
+                PrimeStrategy Ghana Ltd. is an indigenous strategic consulting and business solutions firm dedicated to helping organizations address business challenges, improve performance, and achieve sustainable growth.
+              </p>
+
+              <button class="read-more-btn" id="readMoreBtn">Read More</button>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="split-panel-right">
+              <p>
+                We partner with public and private sector organizations to provide practical solutions through strategic advisory, market and consumer research, business intelligence, data analytics, and customer experience assessments.
+              </p>
+              <p>
+                Our approach combines industry knowledge, research, and analytical expertise to help organizations make informed decisions, strengthen operations, identify opportunities, and achieve their business objectives.
+              </p>
+              <p>
+                Beyond our core consulting expertise, we work with specialist partners to connect clients with technology, real estate, and other business solutions, providing broader support to meet their evolving needs.
+              </p>
+            </div>
+
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- ANCHORS + GHANA MAP -->
+    <!-- VISION & MISSION + INTERACTIVE SVG MAP -->
     <section class="psa-panel psa-panel--anchors">
       <div class="psa-panel__bg" aria-hidden="true"></div>
       <div class="psa-panel__scrim psa-panel__scrim--light" aria-hidden="true"></div>
-      <div class="psa-container psa-panel__content">
+      <div class="psa-container psa-panel__content psa-panel__content--anchors">
 
         <div class="psa-anchors__split">
 
+          <!-- Left Side: Vision & Mission Text -->
           <div class="psa-anchors__head">
-            <span class="ps-eyebrow ps-eyebrow--light" data-reveal>At a Glance</span>
-            <h2 class="psa-heading" data-reveal>The Firm in Three Lines</h2>
-            <p class="psa-anchors__lead" data-reveal>
-              Headquartered in Accra with a liaison desk in Washington D.C.,
-              PrimeStrategy operates across every region of Ghana and extends
-              its research and advisory practice to clients throughout West Africa.
-            </p>
+            <span class="ps-eyebrow ps-eyebrow--light" data-reveal>Our Purpose</span>
+
+            <div class="psa-vision-mission" data-reveal style="margin-top: 2rem;">
+              <div class="psa-vision-block">
+                <h2 class="psa-heading" style="font-size: 1.6rem;">Our Vision</h2>
+                <p class="psa-anchors__lead">
+                  <strong>To become a trusted strategic consulting partner, helping organizations unlock opportunities, improve performance, and achieve sustainable growth through informed decisions and practical business solutions.</strong>
+                </p>
+              </div>
+
+              <div class="psa-vision-block">
+                <h2 class="psa-heading" style="font-size: 1.6rem;">Our Mission</h2>
+                <p class="psa-anchors__lead">
+                  <strong>To provide organizations with strategic guidance, research driven insights, and innovative business solutions that address challenges, strengthen performance, and create lasting value.</strong>
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div class="psa-map" data-reveal aria-label="Map of Ghana with regional presence">
+          <!-- Right Side: The SVG Map (Desktop) -->
+          <div class="psa-map psa-map--inline" data-reveal aria-label="Map of Ghana with regional presence">
             <svg class="psa-map__svg"
                  viewBox="149.07 -2 661.86 964"
                  xmlns="http://www.w3.org/2000/svg"
                  aria-hidden="true">
+
+              <g class="psa-map__lines" aria-hidden="true">
+                <line class="psa-map__line" x1="640" y1="817" x2="470" y2="700"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="470" y2="215"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="270" y2="815"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="480" y2="880"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="640" y2="690"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="450" y2="600"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="215" y2="620"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="530" y2="60"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="250" y2="110"/>
+                <line class="psa-map__line" x1="640" y1="817" x2="610" y2="710"/>
+              </g>
 
               <g class="psa-map__regions">
                 <path class="psa-map__region" data-region="Upper West"        d="M420.48,24.82L418.29,30.53L416.61,49L410.58,54.13L410.3,59.4L401.49,63.97L399.24,75.79L400.65,86.61L415.49,95.72L417.57,107.45L417.52,107.48L400.71,121L386.37,148.2L395.12,157.09L396.32,163.32L382.17,169.82L378.84,175.67L381.3,195.22L379.9,202.5L337.54,202.15L329.32,209.43L321.45,203.92L281.38,208.31L263.01,213.46L261.26,221.8L237.64,230.86L229.77,228.28L221.67,217.95L230.27,201.15L226.78,195.49L226.72,178.42L222.67,170.36L221.19,147.84L227.09,136.4L216.09,130.43L214.9,124.86L218.83,117.32L207.52,98.18L201.49,81.33L205.52,72.59L202.99,68.32L208.81,56.96L211.53,46.9L218.65,37.18L216.89,25.67L227.59,23.67L275.39,22.89L282.39,25.67L296.53,23.61L329.22,23.61L335.38,25.73L374.43,25.81L374.5,20.53L403.07,20.53L403.12,24.82Z"/>
@@ -121,125 +363,36 @@
                 <path class="psa-map__region" data-region="Greater Accra"     d="M734.69,807.55L717.3,804.3L697.01,802.54L671.8,805.35L657.97,810.63L649.4,816.08L641.88,817.31L636.28,824.52L618.26,835.41L597.97,843.51L574.74,850.39L575.47,837.95L570.44,829.72L559.1,821.92L557.14,811.84L567.7,801.88L571.48,805.68L584.08,805.45L590.17,800.4L599.84,809.25L613.48,792.8L625.03,780.76L631.75,776.12L635.31,763.88L645.81,761.55L652.96,756.48L671,758.6L681.51,767.25L679.83,771.26L685.29,778.24L700.61,772.11L707.76,774.01L717.83,783.09L723.51,795.33Z"/>
               </g>
 
-              <!-- Greater Accra HQ pulse -->
-              <g class="psa-map__pulse-wrap" aria-hidden="true">
-                <circle class="psa-map__pulse" cx="640" cy="817" r="12"/>
-                <circle class="psa-map__pulse psa-map__pulse--delay" cx="640" cy="817" r="12"/>
-                <circle class="psa-map__hq" cx="640" cy="817" r="7"/>
-              </g>
-
-              <!-- Compass -->
-              <g class="psa-map__compass" aria-hidden="true">
-                <line x1="780" y1="40" x2="780" y2="72"/>
-                <polygon points="780,36 775,48 785,48"/>
-                <text x="780" y="90" text-anchor="middle">N</text>
+              <g class="psa-map__dots" aria-hidden="true">
+                <g class="psa-map__dot-group" data-label="Upper West Region"><circle class="psa-map__dot" cx="315" cy="115" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Upper East Region"><circle class="psa-map__dot" cx="520" cy="60" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="North East Region"><circle class="psa-map__dot" cx="510" cy="150" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Northern Region"><circle class="psa-map__dot" cx="600" cy="300" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Savannah Region"><circle class="psa-map__dot" cx="380" cy="360" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Bono East Region"><circle class="psa-map__dot" cx="520" cy="500" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Oti Region"><circle class="psa-map__dot" cx="680" cy="480" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Bono Region"><circle class="psa-map__dot" cx="270" cy="550" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Ahafo Region"><circle class="psa-map__dot" cx="260" cy="660" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Ashanti Region"><circle class="psa-map__dot" cx="430" cy="680" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Eastern Region"><circle class="psa-map__dot" cx="570" cy="680" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Volta Region"><circle class="psa-map__dot" cx="710" cy="680" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Western North Region"><circle class="psa-map__dot" cx="240" cy="780" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Western Region"><circle class="psa-map__dot" cx="300" cy="870" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Central Region"><circle class="psa-map__dot" cx="480" cy="830" r="4.5"/></g>
+                <g class="psa-map__dot-group" data-label="Greater Accra, Headquarters">
+                  <circle class="psa-map__pulse" cx="640" cy="817" r="12"/>
+                  <circle class="psa-map__pulse psa-map__pulse--delay" cx="640" cy="817" r="12"/>
+                  <circle class="psa-map__dot psa-map__dot--hq" cx="640" cy="817" r="6"/>
+                </g>
               </g>
 
             </svg>
 
-            <div class="psa-map__tooltip" id="mapTooltip" aria-hidden="true"></div>
-
-            <p class="psa-map__caption" data-reveal>
-              Accra HQ · Washington D.C. liaison · Serving all 16 regions
-            </p>
+            <div class="psa-map__tooltip" id="mapTooltipDesktop" aria-hidden="true"></div>
           </div>
 
         </div>
 
-        <div class="psa-anchors__grid">
-          <div class="psa-anchor" data-reveal>
-            <span class="psa-anchor__label">Offices</span>
-            <span class="psa-anchor__value">Accra · Washington D.C.</span>
-          </div>
-          <div class="psa-anchor" data-reveal>
-            <span class="psa-anchor__label">Established</span>
-            <span class="psa-anchor__value">Ghana · West Africa</span>
-          </div>
-          <div class="psa-anchor" data-reveal>
-            <span class="psa-anchor__label">Practice</span>
-            <span class="psa-anchor__value">10 Practice Areas</span>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- CEO -->
-    <section class="psa-panel psa-panel--ceo">
-      <div class="psa-panel__bg" aria-hidden="true"></div>
-      <div class="psa-panel__scrim psa-panel__scrim--light" aria-hidden="true"></div>
-      <div class="psa-container psa-panel__content psa-ceo__grid">
-        <aside class="psa-ceo__aside">
-          <div class="psa-ceo__aside-inner">
-            <span class="ps-eyebrow" data-reveal>Words of the CEO</span>
-            <h2 class="psa-ceo__name" data-reveal>Nick Oteng Jnr</h2>
-            <p class="psa-ceo__role" data-reveal>Chief Executive Officer</p>
-          </div>
-        </aside>
-
-        <div class="psa-ceo__body">
-          <div class="psa-ceo__rule" aria-hidden="true"></div>
-          <div class="psa-ceo__text">
-            <p class="psa-ceo__line">Today, corporations must execute projects and achieve goals with greater sophistication and speed. Meeting these demands is no easy task. While business execution naturally requires strategy, it can only be fully realized through partnerships that leverage skilled resources to plan and execute goals.</p>
-            <p class="psa-ceo__line">Our greatest strength as a business is the firm conviction that we can contribute to the realization of our clients’ goals through all the various stages of their growth and business cycle. PrimeStrategy delivers quality solutions and meaningful results to support our client’s long-term strategic objectives.</p>
-            <p class="psa-ceo__line">Our professionals use deep industry knowledge and expertise in strategy, business operations, project management, information technology, research and data analytics to drive sustainable and measurable results.</p>
-            <p class="psa-ceo__line">We specialize in serving clients in all industries with deep focus in the oil and gas, finance, service, real estate, insurance, banking, manufacturing, government and non-profit sectors.</p>
-            <p class="psa-ceo__line">As these sectors face significant growth and pressure from today’s dynamic market environment, we provide key strategies and resources to ensure successful operations in Ghana and globally.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ABOUT US — NAVY -->
-    <section class="psa-panel psa-panel--navy">
-      <div class="psa-panel__bg" aria-hidden="true"></div>
-      <div class="psa-panel__scrim" aria-hidden="true"></div>
-      <div class="psa-container psa-panel__content">
-        <span class="ps-eyebrow ps-eyebrow--light" data-reveal>Who we are</span>
-        <h3 class="psa-panel__title" data-reveal>
-          A research and IT consulting firm that partners with organizations
-          to support their immediate and future strategic goals.
-        </h3>
-        <p class="psa-panel__text" data-reveal>
-          PrimeStrategy Ghana Limited brings together specialists in strategy,
-          business operations, project management, information technology,
-          research, and data analytics.
-        </p>
-      </div>
-    </section>
-
-    <!-- ABOUT US — BLUE -->
-    <section class="psa-panel psa-panel--blue">
-      <div class="psa-panel__bg" aria-hidden="true"></div>
-      <div class="psa-panel__scrim" aria-hidden="true"></div>
-      <div class="psa-container psa-panel__content">
-        <span class="ps-eyebrow ps-eyebrow--light" data-reveal>What drives results</span>
-        <h3 class="psa-panel__title" data-reveal>
-          We deliver quality solutions and meaningful results to support
-          our clients’ long-term strategic objectives.
-        </h3>
-        <p class="psa-panel__text" data-reveal>
-          Our professionals use in-depth industry knowledge and expertise to
-          drive sustainable and measurable results for clients across every
-          sector we serve.
-        </p>
-      </div>
-    </section>
-
-    <!-- ABOUT US — ORANGE -->
-    <section class="psa-panel psa-panel--orange">
-      <div class="psa-panel__bg" aria-hidden="true"></div>
-      <div class="psa-panel__scrim" aria-hidden="true"></div>
-      <div class="psa-container psa-panel__content">
-        <span class="ps-eyebrow ps-eyebrow--light" data-reveal>Our conviction</span>
-        <h3 class="psa-panel__title" data-reveal>
-          Our greatest strength is the firm conviction that we can contribute
-          to the realization of our clients’ goals.
-        </h3>
-        <p class="psa-panel__text" data-reveal>
-          Through a strategic partnership in day-to-day operations, we help
-          businesses across Ghana and beyond plan, execute, and grow.
-        </p>
       </div>
     </section>
 
@@ -248,23 +401,20 @@
       <div class="psa-panel__bg" aria-hidden="true"></div>
       <div class="psa-panel__scrim psa-panel__scrim--light" aria-hidden="true"></div>
       <div class="psa-container psa-panel__content">
-        <span class="ps-eyebrow" data-reveal>Our Solutions</span>
-        <h2 class="psa-heading" data-reveal>What We Offer</h2>
+        <span class="ps-eyebrow" data-reveal>Our Expertise</span>
+        <h2 class="psa-heading" data-reveal>Core Services</h2>
 
         <p class="psa-pullquote" data-reveal>
-          We offer customized and targeted solutions for our clients, providing
-          value-added results throughout our engagement process. Our value-based
-          pricing approach allows our clients to see direct returns on their
-          investment.
+          We partner with organizations to assess business challenges, identify opportunities, and develop practical strategies that strengthen operations and support sustainable growth.
         </p>
 
         <ul class="psa-tags" data-reveal>
-          <li><a href="services.html" class="psa-tag">Data Analytics</a></li>
-          <li><a href="services.html" class="psa-tag">Custom IT Solutions</a></li>
-          <li><a href="services.html" class="psa-tag">Business Intelligence</a></li>
-          <li><a href="services.html" class="psa-tag">Project Management</a></li>
+          <li><a href="services.html" class="psa-tag">Strategic Consulting</a></li>
+          <li><a href="services.html" class="psa-tag">Market Intelligence</a></li>
           <li><a href="services.html" class="psa-tag">Consumer Research</a></li>
-          <li><a href="services.html" class="psa-tag">Market Sizing</a></li>
+          <li><a href="services.html" class="psa-tag">Customer Experience</a></li>
+          <li><a href="services.html" class="psa-tag">Data Analytics</a></li>
+          <li><a href="services.html" class="psa-tag">Project Management</a></li>
         </ul>
       </div>
     </section>
@@ -289,6 +439,32 @@
   <script src="js/nav.js"></script>
   <script src="js/transitions.js"></script>
   <script src="js/about.js"></script>
+
+  <!-- Script for the Split Panel Animation -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const btn = document.getElementById("readMoreBtn");
+      const container = document.getElementById("whatWeDoContainer");
+
+      if (btn && container) {
+        btn.addEventListener("click", function() {
+          container.classList.toggle("is-expanded");
+
+          if (container.classList.contains("is-expanded")) {
+            btn.textContent = "Read Less";
+          } else {
+            btn.textContent = "Read More";
+          }
+
+          setTimeout(() => {
+            if (typeof ScrollTrigger !== "undefined") {
+              ScrollTrigger.refresh();
+            }
+          }, 800);
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>

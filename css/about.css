@@ -122,14 +122,16 @@ html, body {
   pointer-events: none;
 }
 
-.psa-panel--anchors .psa-panel__bg {
+.psa-panel--anchors .psa-panel__bg,
+.psa-panel--map .psa-panel__bg {
   background-color: #1E4FA8;
   background-image: url("../images/about-bg.jpg");
   background-size: cover;
   background-position: center;
   background-blend-mode: multiply;
 }
-.psa-panel--anchors .psa-panel__bg::after {
+.psa-panel--anchors .psa-panel__bg::after,
+.psa-panel--map .psa-panel__bg::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -237,7 +239,7 @@ html, body {
 }
 
 .psa-panel--closing .psa-panel__bg {
-  background-color: #D4521E;
+  background-color: #0A1E45;
   background-image: url("../images/about-bg.jpg");
   background-size: cover;
   background-position: center;
@@ -249,8 +251,8 @@ html, body {
   inset: 0;
   background: linear-gradient(
     135deg,
-    rgba(212, 82, 30, 0.72) 0%,
-    rgba(178, 63, 18, 0.82) 100%
+    rgba(10, 30, 69, 0.85) 0%,
+    rgba(6, 18, 42, 0.90) 100%
   );
   pointer-events: none;
 }
@@ -268,6 +270,18 @@ html, body {
 }
 @media (max-width: 900px) { .psa-panel__content { padding: 0 30px; } }
 @media (max-width: 600px) { .psa-panel__content { padding: 0 22px; } }
+
+.psa-panel__content--anchors {
+  padding-top: 2vh;
+  padding-bottom: 12vh;
+}
+
+.psa-panel__content--map {
+  padding-top: 3vh;
+  padding-bottom: 3vh;
+  max-height: 100%;
+  overflow: visible;
+}
 
 /* ═══ DISPLAY TYPOGRAPHY — Fraunces ═══ */
 .psa-display {
@@ -360,7 +374,7 @@ html, body {
   grid-template-columns: 1fr 1fr;
   gap: 72px;
   align-items: center;
-  margin-bottom: 56px;
+  margin-bottom: 0;
 }
 .psa-anchors__head { max-width: 560px; }
 .psa-anchors__lead {
@@ -368,8 +382,73 @@ html, body {
   font-size: clamp(1rem, 1.25vw, 1.15rem);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.88);
-  margin: 0;
+  margin: 8px 0 0;
   max-width: 520px;
+}
+
+/* ═══ THREE LINES ═══ */
+.psa-lines {
+  list-style: none;
+  margin: 40px 0 32px;
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.psa-lines__item {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+}
+
+.psa-lines__label {
+  flex: 0 0 130px;
+  font-family: var(--ps-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #FFB584;
+}
+
+.psa-lines__value {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.15rem, 1.7vw, 1.55rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  color: #FFFFFF;
+}
+
+/* ═══ MAP PANEL COPY ═══ */
+.psa-map__copy {
+  text-align: center;
+  margin-bottom: 18px;
+}
+.psa-map__copy .ps-eyebrow {
+  margin: 0 0 12px;
+}
+.psa-map__title {
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  color: #FFFFFF;
+  margin: 0 0 10px;
+}
+.psa-map__lead {
+  font-family: var(--ps-font-sans);
+  font-size: 14px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ─── Ghana map ─── */
@@ -378,7 +457,14 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 14px;
+  width: 100%;
+}
+.psa-map__stage {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 .psa-map__svg {
   width: 100%;
@@ -400,12 +486,16 @@ html, body {
     stroke 0.35s var(--ps-ease);
   cursor: pointer;
 }
-.psa-map__region:hover {
+.psa-map__region:hover,
+.psa-map__region.is-selected {
   fill: rgba(255, 235, 210, 0.22);
   stroke: #FFEBD2;
 }
+.psa-map__region.is-selected {
+  fill: rgba(255, 235, 210, 0.32);
+}
 
-/* Outline draw-in — applied to each region path */
+/* Outline draw-in */
 .psa-map__svg .psa-map__region {
   stroke-dasharray: 2000;
   stroke-dashoffset: 2000;
@@ -419,7 +509,7 @@ html, body {
   stroke-dashoffset: 0;
 }
 
-/* Region stagger (optional, spreads the draw across the map) */
+/* Region stagger */
 .psa-map__region:nth-of-type(1)  { transition-delay: 0.00s, 0s, 0s; }
 .psa-map__region:nth-of-type(2)  { transition-delay: 0.06s, 0s, 0s; }
 .psa-map__region:nth-of-type(3)  { transition-delay: 0.12s, 0s, 0s; }
@@ -437,7 +527,49 @@ html, body {
 .psa-map__region:nth-of-type(15) { transition-delay: 0.84s, 0s, 0s; }
 .psa-map__region:nth-of-type(16) { transition-delay: 0.90s, 0s, 0s; }
 
-/* HQ pulse — Accra (Greater Accra region center) */
+/* ═══ MAP — CONNECTING LINES ═══ */
+.psa-map__lines { pointer-events: none; }
+.psa-map__line {
+  stroke: #E86A34;
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  opacity: 0;
+  transition: opacity 1.2s var(--ps-ease) 1.2s;
+}
+.psa-panel.is-active .psa-map__line,
+.psa-map.is-revealed .psa-map__line {
+  opacity: 0.55;
+}
+
+/* ═══ MAP — DOTS ═══ */
+.psa-map__dots { position: relative; }
+.psa-map__dot-group { cursor: pointer; }
+.psa-map__dot {
+  fill: #E86A34;
+  stroke: #FFFFFF;
+  stroke-width: 1.2;
+  transition: r 0.3s var(--ps-ease), fill 0.3s var(--ps-ease), stroke 0.3s var(--ps-ease);
+}
+.psa-map__dot--hq {
+  fill: #E86A34;
+  stroke: #FFFFFF;
+  stroke-width: 1.5;
+  filter: drop-shadow(0 0 6px rgba(232, 106, 52, 0.9));
+}
+.psa-map__dot-group:hover .psa-map__dot,
+.psa-map__dot-group.is-selected .psa-map__dot {
+  r: 7;
+  fill: #FFEBD2;
+  stroke: #E86A34;
+}
+.psa-map__dot-group:hover .psa-map__dot--hq,
+.psa-map__dot-group.is-selected .psa-map__dot--hq {
+  r: 7;
+  fill: #FFEBD2;
+  stroke: #E86A34;
+}
+
+/* HQ pulse */
 .psa-map__pulse {
   fill: none;
   stroke: #E86A34;
@@ -453,156 +585,166 @@ html, body {
   100% { opacity: 0;   r: 22; }
 }
 
-.psa-map__hq {
-  fill: #E86A34;
-  filter: drop-shadow(0 0 6px rgba(232, 106, 52, 0.9));
-}
-
-/* Compass — slow rotation */
-.psa-map__compass line,
-.psa-map__compass polygon {
-  stroke: rgba(255, 255, 255, 0.55);
-  stroke-width: 1.4;
-}
-.psa-map__compass polygon { fill: rgba(255, 255, 255, 0.7); }
-.psa-map__compass text {
-  fill: rgba(255, 255, 255, 0.65);
-  font-family: var(--ps-font-mono);
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  stroke: none;
-}
-.psa-map__svg .psa-map__compass {
-  transform-origin: 780px 60px;
-  animation: psa-compass-spin 90s linear infinite;
-}
-@keyframes psa-compass-spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
-/* Region tooltip */
+/* ═══ MAP — TOOLTIP (desktop hover) ═══ */
 .psa-map__tooltip {
   position: absolute;
   pointer-events: none;
   padding: 6px 12px;
-  background: rgba(10, 30, 69, 0.92);
+  background: rgba(10, 30, 69, 0.94);
   color: #FFFFFF;
   font-family: var(--ps-font-mono);
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.10em;
   text-transform: uppercase;
   border-radius: 6px;
   opacity: 0;
-  transform: translate(-50%, calc(-100% - 12px)) scale(0.9);
-  transition: opacity 0.25s var(--ps-ease), transform 0.25s var(--ps-ease);
+  transform: translate(-50%, calc(-100% - 14px)) scale(0.9);
+  transition: opacity 0.2s var(--ps-ease), transform 0.2s var(--ps-ease);
   white-space: nowrap;
   z-index: 5;
+  box-shadow: 0 8px 20px -6px rgba(10, 30, 69, 0.55);
 }
 .psa-map__tooltip.is-visible {
   opacity: 1;
-  transform: translate(-50%, calc(-100% - 12px)) scale(1);
+  transform: translate(-50%, calc(-100% - 14px)) scale(1);
 }
 
-/* Caption */
-.psa-map__caption {
-  font-family: var(--ps-font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.72);
-  margin: 0;
-  text-align: center;
-  max-width: 340px;
-  line-height: 1.6;
-}
-
-/* Bottom anchor row */
-.psa-anchors__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  border-top: 1px solid var(--ps-hairline);
-  border-bottom: 1px solid var(--ps-hairline);
-}
-.psa-anchor {
-  padding: 4vh 30px;
-  border-right: 1px solid var(--ps-hairline);
+/* ═══ MAP — INFO CARD (mobile tap) ═══ */
+.psa-map__info {
   display: flex;
-  flex-direction: column;
-  gap: 1.4vh;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(6, 18, 42, 0.92);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 235, 210, 0.22);
+  box-shadow: 0 16px 30px -18px rgba(0, 0, 0, 0.6);
+  color: #FFFFFF;
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  overflow: hidden;
+  pointer-events: none;
+  transition:
+    max-height 0.4s var(--ps-ease),
+    padding 0.4s var(--ps-ease),
+    opacity 0.3s var(--ps-ease);
 }
-.psa-anchor:first-child { padding-left: 0; }
-.psa-anchor:last-child { border-right: 0; }
-.psa-anchor__label {
-  font-family: var(--ps-font-mono);
-  font-size: 11.5px;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ps-orange);
+.psa-map__info.is-visible {
+  max-height: 120px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  opacity: 1;
+  pointer-events: auto;
 }
-.psa-anchor__value {
-  font-family: "Fraunces", Georgia, serif;
-  font-size: clamp(1.35rem, 2.1vw, 1.9rem);
-  font-weight: 700;
-  color: var(--ps-ink);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
+.psa-map__info-label {
+  font-family: var(--ps-font-sans);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.005em;
+  color: #FFFFFF;
+  flex: 1;
+}
+.psa-map__info-close {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  color: #FFFFFF;
+  font-size: 15px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.25s var(--ps-ease), border-color 0.25s var(--ps-ease);
+}
+.psa-map__info-close:hover,
+.psa-map__info-close:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.42);
 }
 
-/* Anchors panel — white on blue, orange labels */
-.psa-panel--anchors .psa-heading { color: #FFFFFF; }
-.psa-panel--anchors .psa-anchor__value { color: #FFFFFF; }
-.psa-panel--anchors .psa-anchor__label { color: #FFB584; }
-.psa-panel--anchors .psa-anchors__grid {
-  border-top-color: rgba(255, 255, 255, 0.22);
-  border-bottom-color: rgba(255, 255, 255, 0.22);
-}
-.psa-panel--anchors .psa-anchor {
-  border-right-color: rgba(255, 255, 255, 0.22);
-}
+/* ═══ RESPONSIVE — ANCHORS PANEL ═══ */
+
+/* Desktop: hide the mobile-only map panel */
+.psa-panel--map { display: none; }
 
 @media (max-width: 900px) {
+  .psa-map--inline { display: none; }
+  .psa-panel--map { display: flex; }
+
   .psa-anchors__split {
     grid-template-columns: 1fr;
     gap: 40px;
-    margin-bottom: 40px;
   }
   .psa-anchors__head { max-width: 100%; }
-  .psa-map__svg { max-width: 340px; }
+
+  .psa-map__svg { max-width: 80vw; }
+  .psa-map__stage { padding-bottom: 8px; }
+  .psa-panel__content--map {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .psa-panel--ceo {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: calc(100vh - var(--ps-nav-h));
+    align-items: flex-start;
+    padding: 60px 0;
+  }
+  .psa-panel--ceo .psa-panel__content {
+    max-height: none;
+    overflow: visible;
+  }
+  .psa-panel--ceo .psa-ceo__grid {
+    align-items: flex-start;
+  }
+  .psa-panel--ceo .psa-ceo__text p {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 720px) {
-  .psa-anchors__grid { grid-template-columns: 1fr; }
-  .psa-anchor { border-right: 0; border-bottom: 1px solid var(--ps-hairline); padding: 2.5vh 0; }
-  .psa-anchor:last-child { border-bottom: 0; }
-
-  .psa-panel--anchors .psa-anchor {
-    border-right-color: transparent;
-    border-bottom-color: rgba(255, 255, 255, 0.22);
+  .psa-lines__item {
+    flex-direction: column;
+    gap: 4px;
   }
-  .psa-panel--anchors .psa-anchor:last-child {
-    border-bottom-color: transparent;
+  .psa-lines__label {
+    flex: 0 0 auto;
   }
 }
 
 @media (max-width: 600px) {
-  .psa-map__svg { max-width: 300px; }
-  .psa-map__caption { font-size: 10px; max-width: 280px; }
-  .psa-map__compass text { font-size: 11px; }
+  .psa-map__svg { max-width: 86vw; }
+  .psa-map__title { font-size: clamp(1.6rem, 8vw, 2rem); }
+  .psa-map__info-label { font-size: 13px; }
 }
 
-/* Reduced motion: show final state of all map animations */
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   .psa-map__region {
     stroke-dashoffset: 0 !important;
     transition: fill 0.2s, stroke 0.2s !important;
   }
   .psa-map__pulse { animation: none !important; opacity: 0.4 !important; }
-  .psa-map__svg .psa-map__compass { animation: none !important; }
+  .psa-map__line { opacity: 0.55 !important; transition: none !important; }
+  .psa-map__info { transition: none !important; }
 }
 
 /* ═══ CEO ═══ */

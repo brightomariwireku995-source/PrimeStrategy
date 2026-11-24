@@ -1,0 +1,20 @@
+[33m13dc0bb[m[33m ([m[1;31mupstream/dev[m[33m)[m Restructured services page, updated contact & careers content, and added new animations
+[33m4b37b44[m Homepage: add top gradient scrim for logo contrast
+[33m3e1e1e8[m Homepage: add top gradient scrim for logo contrast
+[33m8fc4fac[m Homepage: use light logo variant
+[33mf4ac5d5[m Mobile hub: updated vertical progress dots and swipe navigation
+[33meb20bb6[m Fix nav bars to light theme for seamless scroll; update careers form auto-populate
+[33maf716d8[m Fix At a Glance heading to white
+[33m1f1bcdd[m Case Study: fixed shared background, no color shifts, palette match
+[33m396686c[m Careers: luxury white and grey palette, orange accents only
+[33m0580fbb[m Services: split reveal with seam draw, alternating navy/white sections
+[33m893c2a6[m About: info card repositioned, map panel copy, remove compass, fix CEO overflow
+[33m75530b6[m About: split At a Glance into text + map panels on mobile; tap-to-reveal
+[33m9544dce[m Replace contact card image with higher-resolution version
+[33mf0ad703[m Mobile hub: fix dots anchor, remove flicker, add focus effect, fix contact card
+[33m56751d2[m Mobile hub: background restored, animations, image layer fix
+[33m785d3ca[m Mobile hub: card treatment, images behind cards, per-card CTAs, logo pill
+[33mab2fffd[m Add mobile hub: vertical full-bleed card stack
+[33m6a2b55a[m Readme was added
+[33m8d55a12[m Remove Client Login; delete orphan scripts; clean transitions
+[33ma8d93b5[m[33m ([m[1;31mupstream/main[m[33m, [m[1;31mupstream/HEAD[m[33m)[m Initial commit
